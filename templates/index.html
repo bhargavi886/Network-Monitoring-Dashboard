@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cisco Network Operations Center</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Auto refresh (clean enterprise style) -->
+    <script>
+        setInterval(() => {
+            location.reload();
+        }, 5000);
+    </script>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div class="logo">CISCO NOC DASHBOARD</div>
+
+    <div class="status">
+        System Status:
+        <span class="status-ok">ONLINE</span>
+    </div>
+</div>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h3>NETWORK OPS</h3>
+        <ul>
+            <li>📊 Dashboard</li>
+            <li>🖧 Devices</li>
+            <li>🚨 Alerts</li>
+            <li>📜 Logs</li>
+        </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <h1>Network Monitoring Console</h1>
+
+        <!-- ALERT BANNER (NO POPUPS - ENTERPRISE STYLE) -->
+        {% if offline > 0 %}
+        <div class="alert-banner">
+            ⚠ CRITICAL: One or more network devices are DOWN
+        </div>
+        {% endif %}
+
+        <!-- SUMMARY CARDS -->
+        <div class="summary-cards">
+
+            <div class="card">
+                <h3>Total Nodes</h3>
+                <p>{{ total }}</p>
+            </div>
+
+            <div class="card green">
+                <h3>Active Nodes</h3>
+                <p>{{ online }}</p>
+            </div>
+
+            <div class="card red">
+                <h3>Down Nodes</h3>
+                <p>{{ offline }}</p>
+            </div>
+
+        </div>
+
+        <!-- DEVICE TABLE -->
+        <table>
+            <tr>
+                <th>Device</th>
+                <th>IP Address</th>
+                <th>Status</th>
+                <th>Latency</th>
+            </tr>
+
+            {% for device in devices %}
+            <tr>
+                <td>{{ device.name }}</td>
+                <td>{{ device.ip }}</td>
+
+                <td>
+                    {% if device.status == "Online" %}
+                        <span class="online">● ACTIVE</span>
+                    {% else %}
+                        <span class="offline blink">● DOWN</span>
+                    {% endif %}
+                </td>
+
+                <td>{{ device.latency }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

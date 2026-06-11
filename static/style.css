@@ -1,0 +1,162 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial;
+    background: #070b14;
+    color: #e6e6e6;
+}
+
+/* TOP BAR */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    background: #0f172a;
+    border-bottom: 1px solid #1f2a44;
+}
+
+.logo {
+    color: #4cc9f0;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.status-ok {
+    color: #00ff88;
+    font-weight: bold;
+}
+
+/* LAYOUT */
+.layout {
+    display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 200px;
+    background: #0b1220;
+    padding: 20px;
+    height: 100vh;
+    border-right: 1px solid #1f2a44;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+    margin: 5px 0;
+    background: #111a2e;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* MAIN */
+.container {
+    flex: 1;
+    padding: 30px;
+}
+
+h1 {
+    color: #4cc9f0;
+    margin-bottom: 20px;
+}
+
+/* CARDS */
+.summary-cards {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 1;
+    background: #111a2e;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #1f2a44;
+}
+
+.card h3 {
+    color: #aaa;
+    font-size: 13px;
+}
+
+.card p {
+    font-size: 26px;
+    color: #4cc9f0;
+}
+
+/* STATUS COLORS */
+.green p { color: #00ff88; }
+.red p { color: #ff4d4d; }
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #111a2e;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background: #4cc9f0;
+    color: black;
+    padding: 12px;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #1f2a44;
+}
+
+tr:hover {
+    background: #16213a;
+}
+
+/* STATUS TAGS */
+.online {
+    background: #00ff88;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.offline {
+    background: #ff4d4d;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+/* BLINK ANIMATION (IMPORTANT CISCO STYLE EFFECT) */
+.blink {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.4; }
+}
+.alert-banner {
+    background: #ff3b3b;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
