@@ -12,27 +12,36 @@ devices = [
 
 
 def check_device(ip):
+    # Windows uses -n, Linux/Mac uses -c
     param = "-n" if platform.system().lower() == "windows" else "-c"
 
-    result = subprocess.run(
-        ["ping", param, "1", ip],
-        capture_output=True,
-        text=True
-    )
+    try:
+        result = subprocess.run(
+            ["ping", param, "1", ip],
+            capture_output=True,
+            text=True
+        )
 
-    if result.returncode == 0:
-        output = result.stdout
+        if result.returncode == 0:
+            output = result.stdout.lower()
 
-        if "time=" in output:
-            latency = output.split("time=")[1].split("ms")[0] + " ms"
-        elif "time<" in output:
-            latency = "<1 ms"
-        else:
             latency = "Unknown"
 
-        return "Online", latency
+            # safer parsing (works on most systems)
+            if "time=" in output:
+                try:
+                    latency = output.split("time=")[1].split("ms")[0].strip() + " ms"
+                except:
+                    latency = "Unknown"
+            elif "time<" in output:
+                latency = "<1 ms"
 
-    return "Offline", "N/A"
+            return "Online", latency
+
+        return "Offline", "N/A"
+
+    except Exception:
+        return "Offline", "N/A"
 
 
 @app.route("/")
